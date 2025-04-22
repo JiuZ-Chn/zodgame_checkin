@@ -21,4 +21,4 @@ jobs:
     - name: Run 
       run: |
         python3 ./zodgame/zodgame.py "${{secrets.ZODGAME_COOKIE}}"
-    - uses: gautamkrishnar/keepalive-workflow@master
+    - uses: liskin/gh-workflow-keepalive@main
