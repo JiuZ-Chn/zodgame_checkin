@@ -5,6 +5,7 @@ import sys
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8')
 
 import undetected_chromedriver as uc
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 
@@ -148,11 +149,13 @@ def zodgame(cookie_string):
     )
     assert len(driver.find_elements(By.XPATH, '//a[text()="用户名"]')) == 0, "Login fails. Please check your cookie."
         
-    formhash = driver.find_element(By.XPATH, '//input[@name="formhash"]').get_attribute('value')
-    assert zodgame_checkin(driver, formhash) and zodgame_task(driver, formhash), "Checkin failed or task failed."
-
-    driver.close()
-    driver.quit()
+    try:
+        element = WebDriverWait(driver, 240).until(EC.presence_of_element_located((By.XPATH, '//input[@name="formhash"]')))
+        formhash = element.get_attribute('value')
+        assert zodgame_checkin(driver, formhash) and zodgame_task(driver, formhash), "Checkin failed or task failed."
+    finally:
+        driver.close()
+        driver.quit()
     
 if __name__ == "__main__":
     cookie_string = sys.argv[1]

@@ -31,5 +31,5 @@ Zodgame automatic check-in using github action
 
 ### 2. 启用 Actions
 
-- 本项目由Workflow控制，每日8时自动执行。
+- 本项目由Workflow控制，每日凌晨1时30分自动执行。
 - 本项目目前可以正常运行，如果有其他使用问题请在Issues留言。
