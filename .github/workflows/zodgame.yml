@@ -14,7 +14,11 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
+    - uses: actions/setup-python@v6
+      with:
+        python-version: "3.9"
+        cache: "pip"
     - name: Install requirements
       run: |
         pip3 install -r ./zodgame/requirements.txt
